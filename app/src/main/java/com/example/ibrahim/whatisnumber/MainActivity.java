@@ -136,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
             leftArrow.setClickable(false);
             leftArrow.setAlpha(0.5f);
         }
+        numberVoice(v);
     }
     public void rightButton(View v)
     {
@@ -152,8 +153,9 @@ public class MainActivity extends AppCompatActivity {
             rightArrow.setClickable(false);
             rightArrow.setAlpha(0.5f);
         }
+        numberVoice(v);
     }
-    /*public void numberVoice(View v)
+    public void numberVoice(View v)
     {
         numberVoicesInKurdish();
         Log.i("Entered","Entered");
@@ -205,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
         }
-    }*/
+    }
     public void setNumImage()
     {
         switch (Integer.parseInt(numImage.getTag().toString()))
