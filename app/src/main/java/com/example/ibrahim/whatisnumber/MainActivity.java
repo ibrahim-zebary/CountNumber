@@ -3,19 +3,17 @@ package com.example.ibrahim.whatisnumber;
 import android.content.pm.ActivityInfo;
 import android.databinding.DataBindingUtil;
 import android.media.MediaPlayer;
-import android.os.CountDownTimer;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.ibrahim.whatisnumber.databinding.ActivityMainBinding;
 
 import at.markushi.ui.CircleButton;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     ActivityMainBinding binding;
     ImageView leftArrow;
@@ -55,52 +53,16 @@ public class MainActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
-        leftArrow = (ImageView) findViewById(R.id.left_arrow);
-        rightArrow = (ImageView) findViewById(R.id.right_arrow);
 
-        numImage = (ImageView) findViewById(R.id.number_image);
+        numImage = binding.numberImage;
+        binding.leftArrow.setOnClickListener(this);
+        binding.rightArrow.setOnClickListener(this);
+        binding.numberImage.setOnClickListener(this);
         initialization();
 
+
     }
 
-    public void leftButton(View v) {
-        rightArrow.setClickable(true);
-        rightArrow.setAlpha(1f);
-        enteredLeftArrow();
-        tagNum--;
-        numImage.setTag(tagNum);
-        setNumImage();
-        numImage.setTranslationY(800);
-        numImage.setRotationY(180);
-        numImage.animate().translationYBy(-800).setDuration(500).rotationY(0);
-        if (tagNum <= 0) {
-            leftArrow.setClickable(false);
-            leftArrow.setAlpha(0.5f);
-        }
-        numberVoice(v);
-    }
-
-    public void rightButton(View v) {
-        leftArrow.setClickable(true);
-        leftArrow.setAlpha(1f);
-        tagNum++;
-        enteredRightArrow();
-        numImage.setTag(tagNum);
-        setNumImage();
-        numImage.setTranslationY(800);
-        numImage.setRotationY(180);
-        numImage.animate().translationYBy(-800).setDuration(500).rotationY(0);
-        if (tagNum >= 20) {
-            rightArrow.setClickable(false);
-            rightArrow.setAlpha(0.5f);
-        }
-        numberVoice(v);
-    }
-
-    public void numberVoice(View v) {
-        numberVoicesInKurdish();
-        Log.i("Entered", "Entered");
-    }
 
     public void numberVoicesInKurdish() {
         switch (numberVoice) {
@@ -244,31 +206,31 @@ public class MainActivity extends AppCompatActivity {
             case 0:
                 break;
             case 1:
-               binding. img1.animate().alpha(1);
+                binding.img1.animate().alpha(1);
                 break;
             case 2:
-               binding. img2.animate().alpha(1);
+                binding.img2.animate().alpha(1);
                 break;
             case 3:
-               binding. img3.animate().alpha(1);
+                binding.img3.animate().alpha(1);
                 break;
             case 4:
-               binding. img4.animate().alpha(1);
+                binding.img4.animate().alpha(1);
                 break;
             case 5:
-               binding. img5.animate().alpha(1);
+                binding.img5.animate().alpha(1);
                 break;
             case 6:
-               binding. img6.animate().alpha(1);
+                binding.img6.animate().alpha(1);
                 break;
             case 7:
-               binding. img7.animate().alpha(1);
+                binding.img7.animate().alpha(1);
                 break;
             case 8:
-               binding. img8.animate().alpha(1);
+                binding.img8.animate().alpha(1);
                 break;
             case 9:
-               binding. img9.animate().alpha(1);
+                binding.img9.animate().alpha(1);
                 break;
             case 10:
                 binding.img10.animate().alpha(1);
@@ -400,5 +362,59 @@ public class MainActivity extends AppCompatActivity {
         num18 = MediaPlayer.create(this, R.raw.number18);
         num19 = MediaPlayer.create(this, R.raw.number19);
         num20 = MediaPlayer.create(this, R.raw.number20);
+    }
+
+
+    public void leftButton(View v) {
+
+    }
+
+    public void rightButton(View v) {
+
+    }
+
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.left_arrow:
+                binding.rightArrow.setClickable(true);
+                binding.rightArrow.setAlpha(1f);
+                enteredLeftArrow();
+                tagNum--;
+                numImage.setTag(tagNum);
+                setNumImage();
+                numImage.setTranslationY(800);
+                numImage.setRotationY(180);
+                numImage.animate().translationYBy(-800).setDuration(500).rotationY(0);
+                if (tagNum <= 0) {
+                    binding.leftArrow.setClickable(false);
+                    binding.leftArrow.setAlpha(0.5f);
+                }
+                numberVoicesInKurdish();
+                Log.i("Entered", "Entered");
+                break;
+            case R.id.right_arrow:
+                binding.leftArrow.setClickable(true);
+                binding.leftArrow.setAlpha(1f);
+                tagNum++;
+                enteredRightArrow();
+                numImage.setTag(tagNum);
+                setNumImage();
+                numImage.setTranslationY(800);
+                numImage.setRotationY(180);
+                numImage.animate().translationYBy(-800).setDuration(500).rotationY(0);
+                if (tagNum >= 20) {
+                    binding.rightArrow.setClickable(false);
+                    binding.rightArrow.setAlpha(0.5f);
+                }
+                numberVoicesInKurdish();
+                Log.i("Entered", "Entered");
+                break;
+            case R.id.number_image:
+                numberVoicesInKurdish();
+                Log.i("Entered", "Entered");
+                break;
+        }
     }
 }
