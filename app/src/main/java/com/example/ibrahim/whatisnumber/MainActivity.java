@@ -365,14 +365,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    public void leftButton(View v) {
-
-    }
-
-    public void rightButton(View v) {
-
-    }
-
 
     @Override
     public void onClick(View view) {
